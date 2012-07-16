@@ -731,6 +731,14 @@ public final class JsDocInfoParser {
                   token = eatTokensUntilEOL();
                   continue retry;
 
+                case INLINE:
+                  if (!jsdocBuilder.recordInline()) {
+                    parser.addParserWarning("msg.jsdoc.inline",
+                        stream.getLineno(), stream.getCharno());
+                  }
+                  token = eatTokensUntilEOL();
+                  continue retry;
+
                 case NO_SIDE_EFFECTS:
                   if (!jsdocBuilder.recordNoSideEffects()) {
                     parser.addParserWarning("msg.jsdoc.nosideeffects",

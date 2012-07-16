@@ -625,6 +625,23 @@ final public class JSDocInfoBuilder {
   }
 
   /**
+   * Records that the {@link JSDocInfo} being built should have its
+   * {@link JSDocInfo#isInline()} flag set to {@code true}.
+   *
+   * @return {@code true} if the inline was recorded and {@code false}
+   *     if it was already defined
+   */
+  public boolean recordInline() {
+    if (!currentInfo.isInline()) {
+      currentInfo.setInline(true);
+      populated = true;
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  /**
    * Records a fileoverview description.
    *
    * @return {@code true} if the description was recorded and {@code false}

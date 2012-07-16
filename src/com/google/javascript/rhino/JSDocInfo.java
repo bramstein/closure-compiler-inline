@@ -312,11 +312,12 @@ public class JSDocInfo implements Serializable {
   private static final int MASK_EXTERNS       = 0x00008000; // @externs
   private static final int MASK_JAVADISPATCH  = 0x00010000; // @javadispatch
   private static final int MASK_NOCOMPILE     = 0x00020000; // @nocompile
+  private static final int MASK_INLINE        = 0x00040000; // @inline
   // @consistentIdGenerator
-  private static final int MASK_CONSISTIDGEN  = 0x00040000;
+  private static final int MASK_CONSISTIDGEN  = 0x00080000;
   // @idGenerator
-  private static final int MASK_IDGEN         = 0x00080000;
-  private static final int MASK_EXPOSE        = 0x00100000; // @expose
+  private static final int MASK_IDGEN         = 0x00100000;
+  private static final int MASK_EXPOSE        = 0x00200000; // @expose
 
   // 3 bit type field stored in the top 3 bits of the most significant
   // nibble.
@@ -355,6 +356,10 @@ public class JSDocInfo implements Serializable {
 
   void setHidden(boolean value) {
     setFlag(value, MASK_HIDDEN);
+  }
+
+  void setInline(boolean value) {
+    setFlag(value, MASK_INLINE);
   }
 
   void setNoCheck(boolean value) {
@@ -465,6 +470,14 @@ public class JSDocInfo implements Serializable {
    */
   public boolean isHidden() {
     return getFlag(MASK_HIDDEN);
+  }
+
+  /**
+   * Returns whether the {@code @inline} annotation is present on this
+   * {@link JSDocInfo}.
+   */
+  public boolean isInline() {
+    return getFlag(MASK_INLINE);
   }
 
   /**
